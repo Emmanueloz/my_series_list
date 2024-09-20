@@ -4,7 +4,7 @@ class InputText extends StatelessWidget {
   final String labelText;
   final String? value;
   final TextInputType keyboardType;
-  final Function(String)? onChanged;
+  final void Function(String)? onChanged;
   const InputText({
     super.key,
     required this.labelText,

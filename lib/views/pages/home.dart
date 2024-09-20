@@ -38,7 +38,18 @@ class _HomePageState extends State<HomePage> {
           },
         );
       }),
-      floatingActionButton: const ModalFormSeries(),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            scrollControlDisabledMaxHeightRatio: 0.9,
+            builder: (context) {
+              return const ModalFormSeries();
+            },
+          );
+        },
+      ),
     );
   }
 }

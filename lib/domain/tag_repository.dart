@@ -13,13 +13,6 @@ class MemoryTagRepository implements ITagRepository {
 
   @override
   Future<void> init() async {
-    print(
-      "tag ${_tags.length}",
-    );
-    print(
-      "tag ${_tags.isNotEmpty}",
-    );
-
     if (_tags.isNotEmpty) return;
 
     _tags.add(Tag(name: "horror", colorARGB: "0xfffa5252"));
