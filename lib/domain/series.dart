@@ -1,8 +1,10 @@
+import 'package:my_series_list/domain/tag.dart';
+
 class Series {
   final int id;
   final String name;
   final String? description;
-  final List<String> tags;
+  final List<Tag> tags;
   final String? url;
 
   Series({

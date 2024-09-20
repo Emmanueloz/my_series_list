@@ -1,5 +1,5 @@
-import 'package:my_series_list/models/series.dart';
-import 'package:my_series_list/models/series_repository.dart';
+import 'package:my_series_list/domain/series.dart';
+import 'package:my_series_list/domain/series_repository.dart';
 
 class SeriesSQLite extends ISeriesRepository {
   @override

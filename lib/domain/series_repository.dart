@@ -1,4 +1,5 @@
-import 'package:my_series_list/models/series.dart';
+import 'package:my_series_list/domain/series.dart';
+import 'package:my_series_list/domain/tag.dart';
 
 abstract class ISeriesRepository {
   Future<void> init();
@@ -22,7 +23,11 @@ class MemorySeriesRepository implements ISeriesRepository {
       name: 'The Walking Dead',
       description:
           'A post-apocalyptic horror series set in the fictional American city of Albany.',
-      tags: ['horror', 'drama', 'thriller'],
+      tags: [
+        Tag(name: "horror", colorARGB: "0xfffa5252"),
+        Tag(name: "drama", colorARGB: "0xff099268"),
+        Tag(name: "thriller", colorARGB: "0xfff08c00"),
+      ],
       url: 'https://www.imdb.com/title/tt1520211/',
     ));
     _series.add(Series(
@@ -31,9 +36,9 @@ class MemorySeriesRepository implements ISeriesRepository {
       description:
           'A sequel to The Walking Dead, set in the fictional American city of Albany.',
       tags: [
-        'horror',
-        'drama',
-        'thriller',
+        Tag(name: "horror", colorARGB: "0xfffa5252"),
+        Tag(name: "drama", colorARGB: "0xff099268"),
+        Tag(name: "thriller", colorARGB: "0xfff08c00"),
       ],
       url: 'https://www.imdb.com/title/tt1520211/',
     ));
@@ -42,7 +47,11 @@ class MemorySeriesRepository implements ISeriesRepository {
       name: 'The Walking Dead: Michonne',
       description:
           'A sequel to The Walking Dead, set in the fictional American city of Albany.',
-      tags: ['horror', 'drama', 'thriller'],
+      tags: [
+        Tag(name: "horror", colorARGB: "0xfffa5252"),
+        Tag(name: "drama", colorARGB: "0xff099268"),
+        Tag(name: "thriller", colorARGB: "0xfff08c00"),
+      ],
       url: 'https://www.imdb.com/title/tt1520211/',
     ));
   }
