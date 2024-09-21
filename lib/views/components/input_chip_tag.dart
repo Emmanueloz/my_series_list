@@ -21,7 +21,11 @@ class InputChipTag extends StatelessWidget {
       label: Text(tag.name),
       shape: const StadiumBorder(),
       onSelected: onSelected,
-      side: BorderSide(color: Color(int.parse(tag.colorARGB))),
+      side: BorderSide(
+        color: Color(
+          int.parse(tag.colorARGB),
+        ),
+      ),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_series_list/domain/series.dart';
 import 'package:my_series_list/views/components/chip_tags.dart';
+import 'package:my_series_list/views/sections/modal_form_series.dart';
 
 class SeriesDetailsPage extends StatelessWidget {
   const SeriesDetailsPage({super.key});
@@ -17,26 +18,28 @@ class SeriesDetailsPage extends StatelessWidget {
     }
 
     Widget showInfo(Series series) {
+      String description = series.description!.isEmpty
+          ? "Not found description"
+          : series.description!;
+      String url = series.url!.isEmpty ? "No found URL" : series.url!;
+
       return Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              arguments["series"]!.name,
+              series.name,
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             Text(
-              arguments["series"]!.description!,
+              description,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
-            Text(arguments["series"]!.url!),
+            Text(url),
             Wrap(
               spacing: 5,
-              children: arguments["series"]!
-                  .tags
-                  .map((tag) => ChipTag(tag: tag))
-                  .toList(),
+              children: series.tags.map((tag) => ChipTag(tag: tag)).toList(),
             ),
           ],
         ),
@@ -50,6 +53,20 @@ class SeriesDetailsPage extends StatelessWidget {
       body: arguments["series"] == null
           ? showError("Series not found")
           : showInfo(arguments["series"]!),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.edit),
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            scrollControlDisabledMaxHeightRatio: 0.9,
+            builder: (context) {
+              return ModalFormSeries(
+                serie: arguments["series"],
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }

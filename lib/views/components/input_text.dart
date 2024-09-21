@@ -5,12 +5,14 @@ class InputText extends StatelessWidget {
   final String? value;
   final TextInputType keyboardType;
   final void Function(String)? onChanged;
+  final String? Function(String?)? validator;
   const InputText({
     super.key,
     required this.labelText,
     this.value,
     this.keyboardType = TextInputType.text,
     this.onChanged,
+    this.validator,
   });
 
   @override
@@ -23,15 +25,17 @@ class InputText extends StatelessWidget {
           color: Colors.white,
         ),
         decoration: InputDecoration(
-            labelText: labelText,
-            labelStyle: const TextStyle(
-              color: Colors.white,
-            ),
-            focusedBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.white),
-            )),
+          labelText: labelText,
+          labelStyle: const TextStyle(
+            color: Colors.white,
+          ),
+          focusedBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white),
+          ),
+        ),
         initialValue: value,
         onChanged: onChanged,
+        validator: validator,
       ),
     );
   }
