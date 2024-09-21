@@ -17,7 +17,6 @@ class MemorySeriesRepository implements ISeriesRepository {
   @override
   Future<void> init() async {
     if (_series.isNotEmpty) return;
-
     _series.add(Series(
       id: 1,
       name: 'The Walking Dead',
@@ -73,6 +72,7 @@ class MemorySeriesRepository implements ISeriesRepository {
 
   @override
   Future<void> addSeries(Series series) async {
+    series.id = _series.length + 1;
     _series.add(series);
   }
 
@@ -83,7 +83,10 @@ class MemorySeriesRepository implements ISeriesRepository {
 
   @override
   Future<void> updateSeries(Series series) async {
-    _series.remove(series);
-    _series.add(series);
+    List<Series> newSeries =
+        _series.map((s) => s.id == series.id ? series : s).toList();
+
+    _series.clear();
+    _series.addAll(newSeries);
   }
 }

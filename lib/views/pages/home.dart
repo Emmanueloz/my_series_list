@@ -28,12 +28,28 @@ class _HomePageState extends State<HomePage> {
         title: const Text('My series'),
       ),
       body: Consumer<SeriesProvider>(builder: (context, seriesProvider, child) {
+        if (seriesProvider.listSeries.isEmpty) {
+          return const Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("No series found"),
+                SizedBox(height: 10),
+                Text("Add a new series"),
+              ],
+            ),
+          );
+        }
+
         return ListView.builder(
           padding: const EdgeInsets.all(8.0),
           itemCount: seriesProvider.listSeries.length,
           itemBuilder: (context, index) {
             return CardSerie(
               series: seriesProvider.listSeries[index],
+              onDelete: (series) {
+                seriesProvider.deleteSeries(series);
+              },
             );
           },
         );
