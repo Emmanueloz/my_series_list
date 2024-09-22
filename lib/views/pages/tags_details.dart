@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:my_series_list/application/tags_provider.dart';
 import 'package:my_series_list/domain/tag.dart';
 import 'package:my_series_list/views/sections/modal_form_tags.dart';
+import 'package:provider/provider.dart';
 
 class TagsDetailsPage extends StatelessWidget {
   const TagsDetailsPage({super.key});
@@ -31,25 +33,32 @@ class TagsDetailsPage extends StatelessWidget {
       );
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Details"),
-      ),
-      body: arguments["tag"] == null
-          ? showError("Tag not found")
-          : showInfo(arguments["tag"]!),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.edit),
-        onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            scrollControlDisabledMaxHeightRatio: 0.9,
-            builder: (context) {
-              return ModalFormTags(tag: arguments["tag"]);
+    return Consumer<TagsProvider>(
+      builder: (context, tagsProvider, child) {
+        Tag? argumentsTag = arguments["tag"];
+        Tag tag = tagsProvider.listTags
+            .firstWhere((element) => element.id == argumentsTag!.id);
+
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text("Details"),
+          ),
+          body:
+              argumentsTag == null ? showError("Tag not found") : showInfo(tag),
+          floatingActionButton: FloatingActionButton(
+            child: const Icon(Icons.edit),
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                scrollControlDisabledMaxHeightRatio: 0.9,
+                builder: (context) {
+                  return ModalFormTags(tag: tag);
+                },
+              );
             },
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }
