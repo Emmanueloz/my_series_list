@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_series_list/application/tags_provider.dart';
 import 'package:my_series_list/domain/tag.dart';
+import 'package:my_series_list/domain/tag_validator.dart';
 import 'package:my_series_list/views/components/input_text.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +27,9 @@ class _ModalFormTagsState extends State<ModalFormTags> {
 
     if (widget.tag != null) {
       setState(() {
-        _tag = widget.tag!;
+        _tag.id = widget.tag!.id;
+        _tag.name = widget.tag!.name;
+        _tag.colorARGB = widget.tag!.colorARGB;
       });
     }
   }
@@ -76,11 +79,7 @@ class _ModalFormTagsState extends State<ModalFormTags> {
                   onChanged: _onNameChanged,
                   value: _tag.name,
                   validator: (value) {
-                    value = value?.trim();
-                    if (value == null || value.isEmpty) {
-                      return "Name is required";
-                    }
-                    return null;
+                    return TagValidator.isValidName(value);
                   },
                 ),
                 InputText(
@@ -88,15 +87,13 @@ class _ModalFormTagsState extends State<ModalFormTags> {
                   onChanged: _onColorChanged,
                   value: _tag.colorARGB,
                   validator: (value) {
-                    value = value?.trim();
-                    if (value == null || value.isEmpty) {
-                      return "Color is required";
-                    }
-                    return null;
+                    return TagValidator.isValidColor(value);
                   },
                 ),
                 ElevatedButton(
                   onPressed: () {
+                    print(_formKey.currentState!.validate());
+
                     if (_formKey.currentState!.validate()) {
                       _onSave(_tag);
                     }

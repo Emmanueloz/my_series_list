@@ -26,7 +26,7 @@ class _ModalFormSeriesState extends State<ModalFormSeries> {
 
   final _formKey = GlobalKey<FormState>();
 
-  Series _serie = Series(
+  final Series _serie = Series(
     id: 0,
     name: "",
     tags: [],
@@ -50,7 +50,11 @@ class _ModalFormSeriesState extends State<ModalFormSeries> {
 
   void _setSerie(Series serie) {
     setState(() {
-      _serie = serie;
+      _serie.id = serie.id;
+      _serie.name = serie.name;
+      _serie.description = serie.description;
+      _serie.url = serie.url;
+      _serie.tags = serie.tags;
     });
   }
 

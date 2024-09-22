@@ -37,7 +37,9 @@ class MemoryTagRepository implements ITagRepository {
 
   @override
   Future<void> updateTag(Tag tag) async {
-    _tags.remove(tag);
-    _tags.add(tag);
+    List<Tag> newTags = _tags.map((t) => t.id == tag.id ? tag : t).toList();
+
+    _tags.clear();
+    _tags.addAll(newTags);
   }
 }

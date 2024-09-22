@@ -44,6 +44,7 @@ class SeriesProvider with ChangeNotifier {
   Future<void> updateSeries(Series series) async {
     await _repository.updateSeries(series);
     listSeries = await _repository.getSeries();
+
     notifyListeners();
   }
 }

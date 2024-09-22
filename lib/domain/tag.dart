@@ -1,5 +1,5 @@
 class Tag {
-  final int id;
+  int id;
   String name;
   String colorARGB;
   Tag({required this.id, required this.name, required this.colorARGB});
