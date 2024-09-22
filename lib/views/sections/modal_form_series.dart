@@ -145,10 +145,7 @@ class _ModalFormSeriesState extends State<ModalFormSeries> {
                   builder: (context, tagsProvider, child) {
                     return FormField<List<Tag>>(
                       validator: (value) {
-                        print("value: $value");
-                        String? error = SerieValidator.isValidTags(_serie.tags);
-                        print("error: $error");
-                        return error;
+                        return SerieValidator.isValidTags(_serie.tags);
                       },
                       builder: (field) {
                         return Column(
@@ -194,14 +191,25 @@ class _ModalFormSeriesState extends State<ModalFormSeries> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                   ),
-                  child:
-                      const Text("Save", style: TextStyle(color: Colors.black)),
+                  child: const Text(
+                    "Save",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                    ),
+                  ),
                 ),
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: const Text("Cancel"),
+                  child: const Text(
+                    "Cancel",
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 18,
+                    ),
+                  ),
                 ),
               ],
             ),

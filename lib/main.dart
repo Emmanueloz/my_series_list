@@ -5,6 +5,7 @@ import 'package:my_series_list/domain/series_repository.dart';
 import 'package:my_series_list/domain/tag_repository.dart';
 import 'package:my_series_list/views/pages/home.dart';
 import 'package:my_series_list/views/pages/series_details.dart';
+import 'package:my_series_list/views/pages/tags_details.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "/": (context) => const HomePage(),
         "/series": (context) => const SeriesDetailsPage(),
+        "/tags": (context) => const TagsDetailsPage(),
       },
     );
   }

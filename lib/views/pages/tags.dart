@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_series_list/application/tags_provider.dart';
+import 'package:my_series_list/views/components/card_tag.dart';
 import 'package:provider/provider.dart';
 
 class TagsPage extends StatefulWidget {
@@ -39,15 +40,7 @@ class _TagsPageState extends State<TagsPage> {
         padding: const EdgeInsets.all(8.0),
         itemCount: tagsProvider.listTags.length,
         itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(
-              tagsProvider.listTags[index].name,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          );
+          return CardTag(tag: tagsProvider.listTags[index]);
         },
       );
     });

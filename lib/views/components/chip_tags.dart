@@ -8,9 +8,14 @@ class ChipTag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Chip(
-      label: Text(tag.name),
+      label: Text(
+        tag.name,
+        style: const TextStyle(color: Colors.white),
+      ),
       padding: const EdgeInsets.all(0),
-      shape: const StadiumBorder(),
+      shape: const StadiumBorder(
+        side: BorderSide(color: Colors.transparent),
+      ),
       backgroundColor: Color(int.parse(tag.colorARGB)),
     );
   }

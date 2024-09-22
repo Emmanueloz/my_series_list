@@ -43,7 +43,6 @@ class CardSerie extends StatelessWidget {
 
   Card _cardSerie(BuildContext context) {
     return Card(
-      color: const Color.fromRGBO(33, 150, 243, 1),
       child: ListTile(
         title: Text(
           series.name,
@@ -77,7 +76,7 @@ class CardSerie extends StatelessWidget {
 
   Card _backgroundDelete() {
     return const Card.filled(
-      color: Colors.red,
+      color: Color.fromRGBO(172, 76, 70, 1),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
