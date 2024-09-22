@@ -23,9 +23,9 @@ class MemorySeriesRepository implements ISeriesRepository {
       description:
           'A post-apocalyptic horror series set in the fictional American city of Albany.',
       tags: [
-        Tag(name: "horror", colorARGB: "0xfffa5252"),
-        Tag(name: "drama", colorARGB: "0xff099268"),
-        Tag(name: "thriller", colorARGB: "0xfff08c00"),
+        Tag(id: 1, name: "horror", colorARGB: "0xfffa5252"),
+        Tag(id: 2, name: "drama", colorARGB: "0xff099268"),
+        Tag(id: 3, name: "thriller", colorARGB: "0xfff08c00"),
       ],
       url: 'https://www.imdb.com/title/tt1520211/',
     ));
@@ -35,9 +35,9 @@ class MemorySeriesRepository implements ISeriesRepository {
       description:
           'A sequel to The Walking Dead, set in the fictional American city of Albany.',
       tags: [
-        Tag(name: "horror", colorARGB: "0xfffa5252"),
-        Tag(name: "drama", colorARGB: "0xff099268"),
-        Tag(name: "thriller", colorARGB: "0xfff08c00"),
+        Tag(id: 1, name: "horror", colorARGB: "0xfffa5252"),
+        Tag(id: 2, name: "drama", colorARGB: "0xff099268"),
+        Tag(id: 3, name: "thriller", colorARGB: "0xfff08c00"),
       ],
       url: 'https://www.imdb.com/title/tt1520211/',
     ));
@@ -47,9 +47,9 @@ class MemorySeriesRepository implements ISeriesRepository {
       description:
           'A sequel to The Walking Dead, set in the fictional American city of Albany.',
       tags: [
-        Tag(name: "horror", colorARGB: "0xfffa5252"),
-        Tag(name: "drama", colorARGB: "0xff099268"),
-        Tag(name: "thriller", colorARGB: "0xfff08c00"),
+        Tag(id: 1, name: "horror", colorARGB: "0xfffa5252"),
+        Tag(id: 2, name: "drama", colorARGB: "0xff099268"),
+        Tag(id: 3, name: "thriller", colorARGB: "0xfff08c00"),
       ],
       url: 'https://www.imdb.com/title/tt1520211/',
     ));

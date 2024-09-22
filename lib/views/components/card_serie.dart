@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_series_list/domain/series.dart';
 import 'package:my_series_list/views/components/chip_tags.dart';
+import 'package:my_series_list/views/components/confirm_delete_dialog.dart';
 
 class CardSerie extends StatelessWidget {
   final Series series;
@@ -32,23 +33,9 @@ class CardSerie extends StatelessWidget {
     return showDialog(
       context: context,
       builder: (context) {
-        return AlertDialog(
-          title: const Text("Delete"),
-          content: const Text("Are you sure you want to delete this series?"),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context, false);
-              },
-              child: const Text("Cancel"),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context, true);
-              },
-              child: const Text("Delete"),
-            ),
-          ],
+        return ConfirmDeleteDialog(
+          textTitle: "Delete ${series.name}",
+          textContent: "Are you sure you want to delete this series?",
         );
       },
     );

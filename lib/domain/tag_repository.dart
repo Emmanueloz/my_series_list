@@ -15,9 +15,9 @@ class MemoryTagRepository implements ITagRepository {
   Future<void> init() async {
     if (_tags.isNotEmpty) return;
 
-    _tags.add(Tag(name: "horror", colorARGB: "0xfffa5252"));
-    _tags.add(Tag(name: "drama", colorARGB: "0xff099268"));
-    _tags.add(Tag(name: "thriller", colorARGB: "0xfff08c00"));
+    _tags.add(Tag(id: 1, name: "horror", colorARGB: "0xfffa5252"));
+    _tags.add(Tag(id: 2, name: "drama", colorARGB: "0xff099268"));
+    _tags.add(Tag(id: 3, name: "thriller", colorARGB: "0xfff08c00"));
   }
 
   @override
