@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_series_list/application/series_provider.dart';
 import 'package:my_series_list/domain/series.dart';
 import 'package:my_series_list/views/components/chip_tags.dart';
 import 'package:my_series_list/views/sections/modal_form_series.dart';
+import 'package:provider/provider.dart';
 
 class SeriesDetailsPage extends StatelessWidget {
   const SeriesDetailsPage({super.key});
@@ -17,11 +19,12 @@ class SeriesDetailsPage extends StatelessWidget {
       );
     }
 
-    Widget showInfo(Series series) {
-      String description = series.description!.isEmpty
+    Widget showInfo(Series serie) {
+      String description = serie.description!.isEmpty
           ? "Not found description"
-          : series.description!;
-      String url = series.url!.isEmpty ? "No found URL" : series.url!;
+          : serie.description!;
+
+      String url = serie.url!.isEmpty ? "No found URL" : serie.url!;
 
       return Padding(
         padding: const EdgeInsets.all(8.0),
@@ -29,7 +32,7 @@ class SeriesDetailsPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              series.name,
+              serie.name,
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             Text(
@@ -39,34 +42,42 @@ class SeriesDetailsPage extends StatelessWidget {
             Text(url),
             Wrap(
               spacing: 5,
-              children: series.tags.map((tag) => ChipTag(tag: tag)).toList(),
+              children: serie.tags.map((tag) => ChipTag(tag: tag)).toList(),
             ),
           ],
         ),
       );
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Details"),
-      ),
-      body: arguments["series"] == null
-          ? showError("Series not found")
-          : showInfo(arguments["series"]!),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.edit),
-        onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            scrollControlDisabledMaxHeightRatio: 0.9,
-            builder: (context) {
-              return ModalFormSeries(
-                serie: arguments["series"],
+    return Consumer<SeriesProvider>(
+      builder: (context, seriesProvider, child) {
+        Series? argumentsSeries = arguments["series"];
+        Series serie = seriesProvider.listSeries
+            .firstWhere((element) => element.id == argumentsSeries!.id);
+
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text("Details"),
+          ),
+          body: argumentsSeries == null
+              ? showError("Series not found")
+              : showInfo(serie),
+          floatingActionButton: FloatingActionButton(
+            child: const Icon(Icons.edit),
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                scrollControlDisabledMaxHeightRatio: 0.9,
+                builder: (context) {
+                  return ModalFormSeries(
+                    serie: serie,
+                  );
+                },
               );
             },
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }
