@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_series_list/domain/tag.dart';
+import 'package:my_series_list/views/sections/modal_form_tags.dart';
 
 class TagsDetailsPage extends StatelessWidget {
   const TagsDetailsPage({super.key});
@@ -44,7 +45,7 @@ class TagsDetailsPage extends StatelessWidget {
             context: context,
             scrollControlDisabledMaxHeightRatio: 0.9,
             builder: (context) {
-              return Container();
+              return ModalFormTags(tag: arguments["tag"]);
             },
           );
         },

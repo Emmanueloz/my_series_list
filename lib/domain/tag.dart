@@ -1,7 +1,7 @@
 class Tag {
   final int id;
-  final String name;
-  final String colorARGB;
+  String name;
+  String colorARGB;
   Tag({required this.id, required this.name, required this.colorARGB});
 
   Map<String, dynamic> toJson() {

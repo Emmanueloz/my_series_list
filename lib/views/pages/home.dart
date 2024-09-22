@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_series_list/views/pages/series.dart';
 import 'package:my_series_list/views/pages/tags.dart';
 import 'package:my_series_list/views/sections/modal_form_series.dart';
+import 'package:my_series_list/views/sections/modal_form_tags.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -35,7 +36,11 @@ class _HomePageState extends State<HomePage> {
             context: context,
             scrollControlDisabledMaxHeightRatio: 0.9,
             builder: (context) {
-              return const ModalFormSeries();
+              if (_selectedIndex == 0) {
+                return const ModalFormSeries();
+              } else {
+                return const ModalFormTags();
+              }
             },
           );
         },

@@ -24,11 +24,6 @@ class _ModalFormSeriesState extends State<ModalFormSeries> {
   late final TagsProvider _tagsProvider;
   late final SeriesProvider _seriesProvider;
 
-  String name = "";
-  String description = "";
-  String url = "";
-  List<Tag> selectedTags = [];
-
   final _formKey = GlobalKey<FormState>();
 
   Series _serie = Series(
