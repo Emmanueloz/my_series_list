@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_series_list/application/series_provider.dart';
 import 'package:my_series_list/application/tags_provider.dart';
-import 'package:my_series_list/domain/series_repository.dart';
 import 'package:my_series_list/infrastructure/db/sqlite_helper.dart';
+import 'package:my_series_list/infrastructure/services/series_sqlite.dart';
 import 'package:my_series_list/infrastructure/services/tags_sqlite.dart';
 import 'package:my_series_list/views/pages/home.dart';
 import 'package:my_series_list/views/pages/series_details.dart';
@@ -13,12 +13,13 @@ void main() {
   final SQLiteHelper sqliteHelper = SQLiteHelper();
 
   final TagsSQLite tagsRepository = TagsSQLite(sqliteHelper);
+  final SeriesSQLite seriesRepository = SeriesSQLite(sqliteHelper);
 
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(
         create: (_) => SeriesProvider(
-          repository: MemorySeriesRepository(),
+          repository: seriesRepository,
         ),
       ),
       ChangeNotifierProvider(
@@ -44,12 +45,18 @@ class MyApp extends StatelessWidget {
       title: 'My series',
       // Dark theme
 
-      theme: ThemeData.from(
+      theme: ThemeData.dark(
         useMaterial3: true,
-        colorScheme: ColorScheme.dark(
-          primary: Colors.white,
-          secondary: Colors.grey,
-          surfaceContainer: Colors.white,
+      ).copyWith(
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+        ),
+        colorScheme: const ColorScheme.dark(
+          secondary: Colors.white,
+        ),
+        cardTheme: const CardTheme(
+          color: Color.fromARGB(255, 28, 28, 34),
         ),
       ),
       debugShowCheckedModeBanner: false,
@@ -62,3 +69,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+//
