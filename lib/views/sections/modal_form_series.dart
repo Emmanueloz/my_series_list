@@ -159,6 +159,14 @@ class _ModalFormSeriesState extends State<ModalFormSeries> {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            if (tagsProvider.listTags.isEmpty)
+                              const Text(
+                                "No tags found",
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 12,
+                                ),
+                              ),
                             Wrap(
                               spacing: 4,
                               children: tagsProvider.listTags

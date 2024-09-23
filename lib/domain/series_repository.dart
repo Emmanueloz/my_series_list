@@ -62,6 +62,7 @@ class MemorySeriesRepository implements ISeriesRepository {
 
   @override
   Future<List<Series>> getSeriesByTag(String tag) async {
+    // ignore: collection_methods_unrelated_type
     return _series.where((series) => series.tags.contains(tag)).toList();
   }
 

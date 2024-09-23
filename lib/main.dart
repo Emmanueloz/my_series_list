@@ -43,8 +43,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My series',
-      // Dark theme
-
       theme: ThemeData.dark(
         useMaterial3: true,
       ).copyWith(
