@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_series_list/application/tags_provider.dart';
 import 'package:my_series_list/domain/tag.dart';
 import 'package:my_series_list/domain/tag_validator.dart';
+import 'package:my_series_list/views/components/dialog_color_picker.dart';
 import 'package:my_series_list/views/components/input_text.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +19,7 @@ class _ModalFormTagsState extends State<ModalFormTags> {
 
   final _formKey = GlobalKey<FormState>();
 
-  final Tag _tag = Tag(id: 0, name: "", colorARGB: "0xff000000");
+  final Tag _tag = Tag(id: 0, name: "", colorARGB: "0xffffffff");
 
   @override
   void initState() {
@@ -40,9 +41,9 @@ class _ModalFormTagsState extends State<ModalFormTags> {
     });
   }
 
-  void _onColorChanged(String value) {
+  void _onColorChanged(Color color) {
     setState(() {
-      _tag.colorARGB = value;
+      _tag.colorARGB = "0x${color.value.toRadixString(16)}";
     });
   }
 
@@ -85,13 +86,9 @@ class _ModalFormTagsState extends State<ModalFormTags> {
                     return TagValidator.isValidName(value);
                   },
                 ),
-                InputText(
-                  labelText: "Color",
-                  onChanged: _onColorChanged,
-                  value: _tag.colorARGB,
-                  validator: (value) {
-                    return TagValidator.isValidColor(value);
-                  },
+                DialogColorPicker(
+                  colorARGB: _tag.colorARGB,
+                  onColorChanged: _onColorChanged,
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
