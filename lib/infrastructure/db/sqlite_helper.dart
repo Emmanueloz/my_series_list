@@ -1,8 +1,7 @@
-import 'package:my_series_list/domain/db_helper.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as path;
 
-class SQLiteHelper extends DBHelper<Database> {
+class SQLiteHelper {
   static final SQLiteHelper _instance = SQLiteHelper._internal();
   factory SQLiteHelper() => _instance;
 
@@ -10,7 +9,6 @@ class SQLiteHelper extends DBHelper<Database> {
 
   SQLiteHelper._internal();
 
-  @override
   Future<Database> get database async {
     if (_database != null) return _database!;
     _database = await _initDatabase();

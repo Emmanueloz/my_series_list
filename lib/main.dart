@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:my_series_list/application/series_provider.dart';
 import 'package:my_series_list/application/tags_provider.dart';
 import 'package:my_series_list/domain/series_repository.dart';
-import 'package:my_series_list/domain/tag_repository.dart';
+import 'package:my_series_list/infrastructure/db/sqlite_helper.dart';
+import 'package:my_series_list/infrastructure/services/tags_sqlite.dart';
 import 'package:my_series_list/views/pages/home.dart';
 import 'package:my_series_list/views/pages/series_details.dart';
 import 'package:my_series_list/views/pages/tags_details.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  final SQLiteHelper sqliteHelper = SQLiteHelper();
+
+  final TagsSQLite tagsRepository = TagsSQLite(sqliteHelper);
+
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(
@@ -18,7 +23,7 @@ void main() {
       ),
       ChangeNotifierProvider(
         create: (_) => TagsProvider(
-          repository: MemoryTagRepository(),
+          repository: tagsRepository,
         ),
       )
     ],
