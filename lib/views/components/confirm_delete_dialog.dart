@@ -20,13 +20,19 @@ class ConfirmDeleteDialog extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context, false);
           },
-          child: const Text("Cancel"),
+          child: const Text(
+            "Cancel",
+            style: TextStyle(color: Colors.white),
+          ),
         ),
         TextButton(
           onPressed: () {
             Navigator.pop(context, true);
           },
-          child: const Text("Delete"),
+          child: const Text(
+            "Delete",
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       ],
     );

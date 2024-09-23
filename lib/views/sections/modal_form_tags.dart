@@ -18,7 +18,7 @@ class _ModalFormTagsState extends State<ModalFormTags> {
 
   final _formKey = GlobalKey<FormState>();
 
-  Tag _tag = Tag(id: 0, name: "", colorARGB: "0xff000000");
+  final Tag _tag = Tag(id: 0, name: "", colorARGB: "0xff000000");
 
   @override
   void initState() {
@@ -67,7 +67,10 @@ class _ModalFormTagsState extends State<ModalFormTags> {
         children: [
           const Text(
             "New tag",
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           Form(
             key: _formKey,
@@ -90,10 +93,9 @@ class _ModalFormTagsState extends State<ModalFormTags> {
                     return TagValidator.isValidColor(value);
                   },
                 ),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    print(_formKey.currentState!.validate());
-
                     if (_formKey.currentState!.validate()) {
                       _onSave(_tag);
                     }
@@ -109,6 +111,7 @@ class _ModalFormTagsState extends State<ModalFormTags> {
                     ),
                   ),
                 ),
+                const SizedBox(height: 5),
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context);

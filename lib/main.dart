@@ -53,10 +53,16 @@ class MyApp extends StatelessWidget {
           foregroundColor: Colors.black,
         ),
         colorScheme: const ColorScheme.dark(
+          primary: Colors.black,
           secondary: Colors.white,
         ),
         cardTheme: const CardTheme(
           color: Color.fromARGB(255, 28, 28, 34),
+        ),
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: Colors.white,
+          selectionColor: Color.fromRGBO(255, 255, 255, 0.2),
+          selectionHandleColor: Colors.white,
         ),
       ),
       debugShowCheckedModeBanner: false,

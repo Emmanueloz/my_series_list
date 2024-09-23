@@ -18,7 +18,9 @@ class InputChipTag extends StatelessWidget {
     return InputChip(
       selected: selected,
       selectedColor: Color(int.parse(tag.colorARGB)),
-      label: Text(tag.name),
+      label: Text(
+        tag.name,
+      ),
       shape: const StadiumBorder(),
       onSelected: onSelected,
       side: BorderSide(

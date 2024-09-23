@@ -10,7 +10,9 @@ class ChipTag extends StatelessWidget {
     return Chip(
       label: Text(
         tag.name,
-        style: const TextStyle(color: Colors.white),
+        style: const TextStyle(
+          color: Color.fromRGBO(34, 34, 34, 1),
+        ),
       ),
       padding: const EdgeInsets.all(0),
       shape: const StadiumBorder(

@@ -34,8 +34,6 @@ class SeriesSQLite extends ISeriesRepository {
     // Crear un mapa para agrupar las series con sus tags
     final Map<int, Series> seriesMap = {};
 
-    print(seriesResult);
-
     for (var row in seriesResult) {
       final int seriesId = row['series_id'];
       final series = seriesMap.putIfAbsent(seriesId, () {

@@ -83,16 +83,11 @@ class MemorySeriesRepository implements ISeriesRepository {
 
   @override
   Future<void> updateSeries(Series series) async {
-    print(series.toJson());
-
     List<Series> newSeries =
         _series.map((s) => s.id == series.id ? series : s).toList();
 
     _series.clear();
 
-    for (var s in newSeries) {
-      print(s.toJson());
-    }
     _series.addAll(newSeries);
   }
 }

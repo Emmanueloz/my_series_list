@@ -79,9 +79,11 @@ class _ModalFormSeriesState extends State<ModalFormSeries> {
   void _onTagChanged(bool isSelected, Tag tag) {
     setState(() {
       if (isSelected) {
-        _serie.tags.add(tag);
+        if (!_serie.tags.any((e) => e.id == tag.id)) {
+          _serie.tags.add(tag);
+        }
       } else {
-        _serie.tags.remove(tag);
+        _serie.tags.removeWhere((e) => e.id == tag.id);
       }
     });
   }
@@ -93,6 +95,10 @@ class _ModalFormSeriesState extends State<ModalFormSeries> {
       _seriesProvider.addSeries(serie);
     }
     Navigator.pop(context);
+  }
+
+  bool _isSelected(Tag tag) {
+    return _serie.tags.any((e) => e.id == tag.id);
   }
 
   @override
@@ -107,7 +113,10 @@ class _ModalFormSeriesState extends State<ModalFormSeries> {
         children: [
           const Text(
             "New serie",
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           Form(
             key: _formKey,
@@ -156,7 +165,7 @@ class _ModalFormSeriesState extends State<ModalFormSeries> {
                                   .map(
                                     (tag) => InputChipTag(
                                       tag: tag,
-                                      selected: _serie.tags.contains(tag),
+                                      selected: _isSelected(tag),
                                       onSelected: (value) {
                                         _onTagChanged(value, tag);
                                       },
@@ -181,6 +190,7 @@ class _ModalFormSeriesState extends State<ModalFormSeries> {
                     );
                   },
                 ),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
@@ -198,6 +208,7 @@ class _ModalFormSeriesState extends State<ModalFormSeries> {
                     ),
                   ),
                 ),
+                const SizedBox(height: 5),
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context);
