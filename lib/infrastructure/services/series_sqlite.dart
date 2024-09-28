@@ -100,7 +100,26 @@ class SeriesSQLite extends ISeriesRepository {
   }
 
   @override
-  Future<void> deleteSeries(Series series) async {}
+  Future<void> deleteSeries(Series series) async {
+    final db = await _sqliteHelper.database;
+    final batch = db.batch();
+
+    // Eliminar la serie
+    await db.delete(
+      'series',
+      where: 'id = ?',
+      whereArgs: [series.id],
+    );
+
+    // Eliminar todas las relaciones de la serie
+    await db.delete(
+      'series_tags',
+      where: 'series_id = ?',
+      whereArgs: [series.id],
+    );
+
+    await batch.commit();
+  }
 
   @override
   Future<void> updateSeries(Series series) async {
