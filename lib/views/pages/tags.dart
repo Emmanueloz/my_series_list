@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_series_list/application/tags_provider.dart';
 import 'package:my_series_list/views/components/card_tag.dart';
+import 'package:my_series_list/views/pages/layout.dart';
 import 'package:my_series_list/views/sections/modal_form_tags.dart';
 import 'package:provider/provider.dart';
 
@@ -23,7 +24,7 @@ class _TagsPageState extends State<TagsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return LayoutPage(
       appBar: AppBar(
         title: const Text("My Tags"),
       ),
@@ -59,6 +60,7 @@ class _TagsPageState extends State<TagsPage> {
           );
         },
       ),
+      showNavigationBar: true,
     );
   }
 }

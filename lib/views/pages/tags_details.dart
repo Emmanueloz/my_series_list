@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_series_list/application/tags_provider.dart';
 import 'package:my_series_list/domain/tag.dart';
+import 'package:my_series_list/views/pages/layout.dart';
 import 'package:my_series_list/views/sections/modal_form_tags.dart';
 import 'package:provider/provider.dart';
 
@@ -39,7 +40,7 @@ class TagsDetailsPage extends StatelessWidget {
         Tag tag = tagsProvider.listTags
             .firstWhere((element) => element.id == argumentsTag!.id);
 
-        return Scaffold(
+        return LayoutPage(
           appBar: AppBar(
             title: const Text("Details"),
           ),

@@ -7,6 +7,7 @@ import 'package:my_series_list/infrastructure/services/tags_sqlite.dart';
 import 'package:my_series_list/views/pages/home.dart';
 import 'package:my_series_list/views/pages/series_details.dart';
 import 'package:my_series_list/views/pages/tags_details.dart';
+import 'package:my_series_list/views/provider/navigator.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -26,6 +27,9 @@ void main() {
         create: (_) => TagsProvider(
           repository: tagsRepository,
         ),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => NavigatorProvider(),
       )
     ],
     builder: (context, child) {

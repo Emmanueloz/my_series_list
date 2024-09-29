@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_series_list/application/series_provider.dart';
 import 'package:my_series_list/domain/series.dart';
 import 'package:my_series_list/views/components/chip_tags.dart';
+import 'package:my_series_list/views/pages/layout.dart';
 import 'package:my_series_list/views/sections/modal_form_series.dart';
 import 'package:provider/provider.dart';
 
@@ -55,7 +56,7 @@ class SeriesDetailsPage extends StatelessWidget {
         Series serie = seriesProvider.listSeries
             .firstWhere((element) => element.id == argumentsSeries!.id);
 
-        return Scaffold(
+        return LayoutPage(
           appBar: AppBar(
             title: const Text("Details"),
           ),
