@@ -29,6 +29,7 @@ class SeriesSQLite extends ISeriesRepository {
       FROM series
       LEFT JOIN series_tags ON series.id = series_tags.series_id
       LEFT JOIN tags ON tags.id = series_tags.tag_id
+      ORDER BY series.id DESC
     """);
 
     // Crear un mapa para agrupar las series con sus tags
