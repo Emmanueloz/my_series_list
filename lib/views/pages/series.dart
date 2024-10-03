@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_series_list/application/series_provider.dart';
-import 'package:my_series_list/views/components/card_serie.dart';
+import 'package:my_series_list/views/components/list_series.dart';
 import 'package:my_series_list/views/pages/layout.dart';
 import 'package:my_series_list/views/sections/modal_form_series.dart';
 import 'package:provider/provider.dart';
@@ -42,17 +42,9 @@ class _SeriesPageState extends State<SeriesPage> {
           );
         }
 
-        return ListView.builder(
-          padding: const EdgeInsets.all(8.0),
-          itemCount: seriesProvider.listSeries.length,
-          itemBuilder: (context, index) {
-            return CardSerie(
-              series: seriesProvider.listSeries[index],
-              onDelete: (series) {
-                seriesProvider.deleteSeries(series);
-              },
-            );
-          },
+        return ListSeries(
+          listSeries: seriesProvider.listSeries,
+          onDelete: (series) => seriesProvider.deleteSeries(series),
         );
       }),
       floatingActionButton: FloatingActionButton(

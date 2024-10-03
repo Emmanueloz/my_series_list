@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_series_list/views/components/grid_tags.dart';
+import 'package:my_series_list/domain/tag.dart';
+import 'package:my_series_list/views/components/list_series.dart';
+import 'package:my_series_list/views/components/selected_chip_tag.dart';
 import 'package:my_series_list/views/pages/layout.dart';
 
 class SearchSeries extends StatefulWidget {
@@ -11,19 +13,7 @@ class SearchSeries extends StatefulWidget {
 
 class _SearchSeriesState extends State<SearchSeries> {
   final TextEditingController _controller = TextEditingController();
-  bool _showResult = false;
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  void setShowResult(bool value) {
-    setState(() {
-      _showResult = value;
-    });
-  }
+  List<Tag> selectTags = [];
 
   Widget searchSeries(BuildContext context) {
     return TextField(
@@ -46,7 +36,6 @@ class _SearchSeriesState extends State<SearchSeries> {
       },
       onSubmitted: (value) {
         print(value);
-        setShowResult(true);
       },
     );
   }
@@ -57,8 +46,32 @@ class _SearchSeriesState extends State<SearchSeries> {
       appBar: AppBar(
         title: searchSeries(context),
       ),
-      body:
-          _showResult ? const Center(child: Text("Result")) : const GridTags(),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SelectedChipTag(
+              validator: () {
+                return null;
+              },
+              isSelected: (tag) => selectTags.any((e) => e.id == tag.id),
+              onTagChanged: (value, tag) {
+                setState(() {
+                  if (value) {
+                    selectTags.add(tag);
+                  } else {
+                    selectTags.removeWhere((e) => e.id == tag.id);
+                  }
+                });
+              },
+            ),
+            Expanded(
+              child: ListSeries(listSeries: []),
+            ),
+          ],
+        ),
+      ),
       showNavigationBar: true,
     );
   }

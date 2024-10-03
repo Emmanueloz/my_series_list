@@ -15,18 +15,20 @@ class CardSerie extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dismissible(
-      key: Key(series.id.toString()),
-      direction: DismissDirection.endToStart,
-      onDismissed: (direction) {
-        onDelete?.call(series);
-      },
-      background: _backgroundDelete(),
-      confirmDismiss: (direction) {
-        return showConfirmDelete(context);
-      },
-      child: _cardSerie(context),
-    );
+    return onDelete != null
+        ? Dismissible(
+            key: Key(series.id.toString()),
+            direction: DismissDirection.endToStart,
+            onDismissed: (direction) {
+              onDelete?.call(series);
+            },
+            background: _backgroundDelete(),
+            confirmDismiss: (direction) {
+              return showConfirmDelete(context);
+            },
+            child: _cardSerie(context),
+          )
+        : _cardSerie(context);
   }
 
   Future<bool?> showConfirmDelete(BuildContext context) {

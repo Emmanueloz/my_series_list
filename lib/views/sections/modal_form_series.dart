@@ -4,9 +4,8 @@ import 'package:my_series_list/application/tags_provider.dart';
 import 'package:my_series_list/domain/serie_validator.dart';
 import 'package:my_series_list/domain/series.dart';
 import 'package:my_series_list/domain/tag.dart';
-import 'package:my_series_list/views/components/input_chip_tag.dart';
-
 import 'package:my_series_list/views/components/input_text.dart';
+import 'package:my_series_list/views/components/selected_chip_tag.dart';
 import 'package:provider/provider.dart';
 
 class ModalFormSeries extends StatefulWidget {
@@ -149,53 +148,13 @@ class _ModalFormSeriesState extends State<ModalFormSeries> {
                     return SerieValidator.isValidUrl(value);
                   },
                 ),
-                Consumer<TagsProvider>(
-                  builder: (context, tagsProvider, child) {
-                    return FormField<List<Tag>>(
-                      validator: (value) {
-                        return SerieValidator.isValidTags(_serie.tags);
-                      },
-                      builder: (field) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (tagsProvider.listTags.isEmpty)
-                              const Text(
-                                "No tags found",
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            Wrap(
-                              spacing: 4,
-                              children: tagsProvider.listTags
-                                  .map(
-                                    (tag) => InputChipTag(
-                                      tag: tag,
-                                      selected: _isSelected(tag),
-                                      onSelected: (value) {
-                                        _onTagChanged(value, tag);
-                                      },
-                                    ),
-                                  )
-                                  .toList(),
-                            ),
-                            if (field.hasError)
-                              Padding(
-                                padding: const EdgeInsets.only(top: 8.0),
-                                child: Text(
-                                  field.errorText ?? '', //
-                                  style: const TextStyle(
-                                    color: Color.fromARGB(255, 221, 166, 163),
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ),
-                          ],
-                        );
-                      },
-                    );
+                SelectedChipTag(
+                  validator: () {
+                    return SerieValidator.isValidTags(_serie.tags);
+                  },
+                  isSelected: (tag) => _isSelected(tag),
+                  onTagChanged: (value, tag) {
+                    _onTagChanged(value, tag);
                   },
                 ),
                 const SizedBox(height: 20),
