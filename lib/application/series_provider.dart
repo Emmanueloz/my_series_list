@@ -19,16 +19,6 @@ class SeriesProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getSeriesByTag(String tag) async {
-    listSeries = await _repository.getSeriesByTag(tag);
-    notifyListeners();
-  }
-
-  Future<void> getSeriesByName(String name) async {
-    listSeries = await _repository.getSeriesByName(name);
-    notifyListeners();
-  }
-
   Future<void> addSeries(Series series) async {
     await _repository.addSeries(series);
     listSeries = await _repository.getSeries();

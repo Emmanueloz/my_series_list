@@ -1,11 +1,11 @@
+import 'package:my_series_list/domain/query_series.dart';
 import 'package:my_series_list/domain/series.dart';
 import 'package:my_series_list/domain/tag.dart';
 
 abstract class ISeriesRepository {
   Future<void> init();
   Future<List<Series>> getSeries();
-  Future<List<Series>> getSeriesByTag(String tag);
-  Future<List<Series>> getSeriesByName(String name);
+  Future<List<Series>> query(QuerySeries query);
   Future<void> addSeries(Series series);
   Future<void> deleteSeries(Series series);
   Future<void> updateSeries(Series series);
@@ -61,17 +61,6 @@ class MemorySeriesRepository implements ISeriesRepository {
   }
 
   @override
-  Future<List<Series>> getSeriesByTag(String tag) async {
-    // ignore: collection_methods_unrelated_type
-    return _series.where((series) => series.tags.contains(tag)).toList();
-  }
-
-  @override
-  Future<List<Series>> getSeriesByName(String name) async {
-    return _series.where((series) => series.name == name).toList();
-  }
-
-  @override
   Future<void> addSeries(Series series) async {
     series.id = _series.length + 1;
     _series.add(series);
@@ -90,5 +79,25 @@ class MemorySeriesRepository implements ISeriesRepository {
     _series.clear();
 
     _series.addAll(newSeries);
+  }
+
+  @override
+  Future<List<Series>> query(QuerySeries query) async {
+    List<Series> result = [];
+    for (var series in _series) {
+      if (series.name.contains(query.name)) {
+        result.add(series);
+      }
+      if (query.tags.isNotEmpty) {
+        for (var tag in series.tags) {
+          if (query.tags.contains(tag.id)) {
+            result.add(series);
+            break;
+          }
+        }
+      }
+    }
+
+    return result;
   }
 }

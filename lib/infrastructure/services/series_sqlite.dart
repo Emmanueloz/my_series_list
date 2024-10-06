@@ -1,3 +1,4 @@
+import 'package:my_series_list/domain/query_series.dart';
 import 'package:my_series_list/domain/series.dart';
 import 'package:my_series_list/domain/series_repository.dart';
 import 'package:my_series_list/domain/tag.dart';
@@ -57,16 +58,6 @@ class SeriesSQLite extends ISeriesRepository {
     }
 
     return seriesMap.values.toList();
-  }
-
-  @override
-  Future<List<Series>> getSeriesByTag(String tag) async {
-    return [];
-  }
-
-  @override
-  Future<List<Series>> getSeriesByName(String name) async {
-    return [];
   }
 
   @override
@@ -156,5 +147,11 @@ class SeriesSQLite extends ISeriesRepository {
       );
     }
     await batch.commit();
+  }
+
+  @override
+  Future<List<Series>> query(QuerySeries query) {
+    // TODO: implement query
+    throw UnimplementedError();
   }
 }
